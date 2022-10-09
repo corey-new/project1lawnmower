@@ -1,4 +1,5 @@
-��#� �p�r�o�j�e�c�t� �1�
-#group members
-# Corey New 
+# Group Members
+
+# Corey New coreynew@csu.fullerton.edu
+
 # John Rehagen jrehagen1@csu.fullerton.edu
