@@ -15,14 +15,14 @@ int main() {
 
   const disk_state alt_one(1), alt_three(3);
 
-  auto sorted_one(alt_one);    
+  auto sorted_one(alt_one);
     //  std::cout << sorted_one.to_string() << std::endl;
 
  auto sorted_three(alt_three); // => LD LD LD
   sorted_three.swap(1);         // => LL DD LD
   sorted_three.swap(3);         // => LL DL DD
   sorted_three.swap(2);         // => LL LD DD
-  
+
   rubric.criterion("disk_state still works", 1,
 		   [&]() {
 		     TEST_EQUAL("total_count() for n=1", 2, alt_one.total_count());
@@ -56,8 +56,8 @@ int main() {
          TEST_EQUAL("get(2) after swaps", DISK_LIGHT, sorted_three.get(2));
          TEST_EQUAL("get(3) after swaps", DISK_DARK, sorted_three.get(3));
          TEST_EQUAL("get(4) after swaps", DISK_DARK, sorted_three.get(4));
-         TEST_EQUAL("get(5) after swaps", DISK_DARK, sorted_three.get(5)); 
-         
+         TEST_EQUAL("get(5) after swaps", DISK_DARK, sorted_three.get(5));
+
 		   });
 
   rubric.criterion("sorted_disks still works", 1,
@@ -104,7 +104,7 @@ int main() {
                return sort_alternate(disk_state(n)).swap_count();
              };
 
-             TEST_EQUAL("n=10 gives 45 swaps", 45, trial(10));         
+             TEST_EQUAL("n=10 gives 45 swaps", 45, trial(10));
              TEST_EQUAL("n=20 gives 190 swaps", 190, trial(20));
              TEST_EQUAL("n=30 gives 435 swaps", 435, trial(30));
              TEST_EQUAL("n=40 gives 780 swaps", 780, trial(40));
