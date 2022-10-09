@@ -112,8 +112,15 @@ public:
   // Return true when this disk_state is fully sorted, with all light disks on
   // the left (low indices) and all dark disks on the right (high indices).
   bool is_sorted() const {
-      
-      return true;
+    bool sorted = true;
+    for (int i = 0; i < total_count(); i++)
+    {
+      if (i < total_count()/2 && get(i) == DISK_DARK)
+        sorted = false;
+      if (i >= total_count()/2 && get(i) == DISK_LIGHT)
+        sorted = false;
+    }
+    return sorted;
   }
 };
 
@@ -144,18 +151,54 @@ public:
 
 // Algorithm that sorts disks using the alternate algorithm.
 sorted_disks sort_alternate(const disk_state& before) {
-	int numOfSwap = 0;                                                                      //record # of step swap
- 
-          }
+  int numOfSwap = 0;
+  int n = before.light_count();
+  disk_state after = disk_state(before);                                                                  //record # of step swap
+  for (int i = 0; i <= n; i++)
+  {
+    for (int j = i % 2; j < 2*n-1; j += 2)
+    {
+      if (j + 1 < 2*n - 1)
+      {
+        if (after.get(j) == DISK_DARK && after.get(j + 1) == DISK_LIGHT)
+        {
+          after.swap(j);
+          numOfSwap++;
+        }
+      }
+    }
+  }
 
-  return sorted_disks(disk_state(state), numOfSwap);
+  return sorted_disks(disk_state(after), numOfSwap);
 }
-
 
 // Algorithm that sorts disks using the lawnmower algorithm.
 sorted_disks sort_lawnmower(const disk_state& before) {
-  	
-	  }
 
-  return sorted_disks(disk_state(state), numOfSwap);
+  int numOfSwap = 0;
+  disk_state after = disk_state(before);
+
+  for(int i = 0; i < before.light_count(); i++) {
+    int j = 1;
+    bool back = false;
+
+    while(j >= 1) { 
+      if(after.get(j - 1) == DISK_DARK && after.get(j) != DISK_DARK) {
+        after.swap(j - 1);
+        numOfSwap++;
+      if(j == after.total_count() - 1) {
+          back = true;
+      } 
+      if(back) {
+        j--;
+      }
+      else {
+        j++;
+      }
+      std::cout << "hello" + j << std::endl;
+    }
+   }
+  }
+
+  return sorted_disks(disk_state(after), numOfSwap);
 }
